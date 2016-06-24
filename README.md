@@ -21,7 +21,6 @@ SampleApp-Webhooks-Java
 * [Requirements](#requirements)
 * [First Use Instructions](#first-use-instructions)
 * [Running the code](#running-the-code)
-* [High Level Workflow](#high-level-workflow)
 * [Project Structure](#project-structure)
 * [Reset the App](#reset-the-app)
 
@@ -39,8 +38,8 @@ In order to successfully run this sample app you need a few things:
 ## First Use Instructions
 
 1. Clone the GitHub repo to your computer
-2. Fill in the [`application.properties`](application.properties) file values (app token, consumer key, consumer secret) by copying over from the keys section for your app.
-3. Fill in the [`application.properties`](application.properties) file values (realmId, access token key, access token secret) with the oauth tokens generated while connecting with the company. 
+2. Fill in the [`application.properties`](src/main/resources/application.properties) file values (app token, consumer key, consumer secret) by copying over from the keys section for your app.
+3. Fill in the [`application.properties`](src/main/resources/application.properties) file values (realmId, access token key, access token secret) with the oauth tokens generated while connecting with the company. 
 4. Also add webhooks subscribed entities and webhooks verifier token that was generated when you subscribed for webhoooks event.
 
 ## Running the code
@@ -55,13 +54,11 @@ Once the sample app code is on your computer, you can do the following steps to 
 6. Once an event notification is received and processed, you can perform step 4 to see that the last updated timestamp has been updated for the realmId for which notification was received.
 7. To run the code on a different port, uncomment and update server.port property in application.properties
 
-## High Level Workflow
-
 
 ## Project Structure
 * **Standard Java coding structure is used for the sample app**
 
-* Java code is located in the [`src.main.java`](src.main.java) directory
+* Java code is located in the [`src.main.java`](src/main/java) directory
 	*  Controller classes are in under the controller folder:
         - [`WebhooksController.java`](src/main/java/com/intuit/developer/sampleapp/webhooks/controllers/WebhooksController.java)
         - [`CompanyController.java`](src/main/java/com/intuit/developer/sampleapp/webhooks/controllers/CompanyController.java)
@@ -74,8 +71,8 @@ Once the sample app code is on your computer, you can do the following steps to 
         - [`CDCService.java`](src/main/java/com/intuit/developer/sampleapp/webhooks/service/qbo/CDCService.java)
         - [`QueryService.java`](src/main/java/com/intuit/developer/sampleapp/webhooks/service/qbo/QueryService.java)
 
-* Property files are located in the [`src.main.resources`](src.main.resources) directory
-* JUnit test files are located in the [`src.test.java`](src.test.java) directory
+* Property files are located in the [`src.main.resources`](src/main/resources) directory
+* JUnit test files are located in the [`src.test.java`](src/test/java) directory
 
 ## Reset the App
 
