@@ -21,6 +21,7 @@ SampleApp-Webhooks-Java
 * [Requirements](#requirements)
 * [First Use Instructions](#first-use-instructions)
 * [Running the code](#running-the-code)
+* [Configuring the endpoint](#configuring-the-endpoint)
 * [Project Structure](#project-structure)
 * [Reset the App](#reset-the-app)
 
@@ -54,6 +55,17 @@ Once the sample app code is on your computer, you can do the following steps to 
 6. Once an event notification is received and processed, you can perform step 4 to see that the last updated timestamp has been updated for the realmId for which notification was received.
 7. To run the code on a different port, uncomment and update server.port property in application.properties
 
+## Configuring the endpoint
+
+Webhooks requires your enpoint to be exposed over the internet. The easiest way to do that while you are still developing your code locally is to use [ngrok](https://ngrok.com/). Here are the steps to configure ngrok
+
+1. Download and install ngrok
+2. Expose your localhost by running "./ngrok http 8080" on the command line. 
+3. You will then get a forwarding url that looks something like this:
+    Forwarding     http://cb063e9f.ngrok.io -> localhost:8080  
+
+This will expose localhost:8080 to the Internet. Your endpoint url will now be http://cb063e9f.ngrok.io/webhooks
+Copy this url and use it for setting up webhooks on developer.intuit.com for your app. 
 
 ## Project Structure
 * **Standard Java coding structure is used for the sample app**
