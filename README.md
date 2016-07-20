@@ -62,9 +62,9 @@ Webhooks requires your enpoint to be exposed over the internet. The easiest way 
 1. Download and install ngrok
 2. Expose your localhost by running "./ngrok http 8080" on the command line. 
 3. You will then get a forwarding url that looks something like this:
-    Forwarding     http://cb063e9f.ngrok.io -> localhost:8080  
-
-This will expose localhost:8080 to the Internet. Your endpoint url will now be http://cb063e9f.ngrok.io/webhooks
+    Forwarding     https://cb063e9f.ngrok.io -> localhost:8080  
+(Remember to use only https url and not the http url for webhooks)
+This will expose localhost:8080 to the Internet. Your endpoint url will now be https://cb063e9f.ngrok.io/webhooks
 Copy this url and use it for setting up webhooks on developer.intuit.com for your app. 
 
 ## Project Structure
