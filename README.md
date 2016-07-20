@@ -50,8 +50,8 @@ Once the sample app code is on your computer, you can do the following steps to 
 1. cd to the project directory</li>
 2. Run the command:`./gradlew bootRun` (Mac OS) or `gradlew.bat bootRun` (Windows)</li>
 3. Wait until the terminal output displays the "Started Application in xxx seconds" message.
-4. Open your browser and go to https://localhost:8080/companyConfigs - This will list the companies in the repository for which you have subscribed event notification.
-5. The webhooks endpoint in the sample app is https://localhost:8080/webhooks
+4. Open your browser and go to http://localhost:8080/companyConfigs - This will list the companies in the repository for which you have subscribed event notification.
+5. The webhooks endpoint in the sample app is http://localhost:8080/webhooks
 6. Once an event notification is received and processed, you can perform step 4 to see that the last updated timestamp has been updated for the realmId for which notification was received.
 7. To run the code on a different port, uncomment and update server.port property in application.properties
 
