@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intuit.developer.sampleapp.webhooks.domain.ResponseWrapper;
@@ -49,6 +50,7 @@ public class WebhooksController {
      * @return
      */
     @RequestMapping(value = "/webhooks", method = RequestMethod.POST)
+    @ResponseBody
     public ResponseEntity<ResponseWrapper> webhooks(@RequestHeader(SIGNATURE) String signature, @RequestBody String payload) {
     	
     	// if signature is empty return 401

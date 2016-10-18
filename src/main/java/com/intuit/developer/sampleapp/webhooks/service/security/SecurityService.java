@@ -1,13 +1,9 @@
 package com.intuit.developer.sampleapp.webhooks.service.security;
 
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.Cipher;
-import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
@@ -17,6 +13,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.intuit.developer.sampleapp.webhooks.service.qbo.WebhooksServiceFactory;
+import com.intuit.ipp.services.WebhooksService;
+import com.intuit.ipp.util.Config;
 import com.intuit.ipp.util.Logger;
 
 /**
@@ -32,12 +31,14 @@ public class SecurityService {
 	
 	private static final org.slf4j.Logger LOG = Logger.getLogger();
 	
-	private static final String ALGORITHM = "HmacSHA256";
 	private static final String VERIFIER_KEY = "webhooks.verifier.token";
 	private static final String ENCRYPTION_KEY = "encryption.key";
 		
 	@Autowired
     Environment env;
+	
+	@Autowired
+    WebhooksServiceFactory webhooksServiceFactory;
 	
 	private SecretKeySpec secretKey;
 	
@@ -58,16 +59,13 @@ public class SecurityService {
      * @return
      */
     public boolean isRequestValid(String signature, String payload) {	
-		try {
-			SecretKeySpec secretKey = new SecretKeySpec(getVerifierKey().getBytes("UTF-8"), ALGORITHM);
-			Mac mac = Mac.getInstance(ALGORITHM);
-			mac.init(secretKey);
-			String hash = Base64.getEncoder().encodeToString(mac.doFinal(payload.getBytes()));
-			return hash.equals(signature);
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException ex) {
-			LOG.error("Error during validating payload", ex.getCause());
-			return false;
-		}
+    	
+    	// set custom config
+		Config.setProperty(Config.WEBHOOKS_VERIFIER_TOKEN, getVerifierKey());
+		
+		// create webhooks service
+		WebhooksService service = webhooksServiceFactory.getWebhooksService();
+		return service.verifyPayload(signature, payload);
 	}
     
     /**

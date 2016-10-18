@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intuit.developer.sampleapp.webhooks.domain.CompanyConfig;
-import com.intuit.developer.sampleapp.webhooks.domain.EventNotification;
-import com.intuit.developer.sampleapp.webhooks.domain.RequestWrapper;
 import com.intuit.developer.sampleapp.webhooks.service.CompanyConfigService;
 import com.intuit.developer.sampleapp.webhooks.service.qbo.QBODataService;
+import com.intuit.developer.sampleapp.webhooks.service.qbo.WebhooksServiceFactory;
+import com.intuit.ipp.data.EventNotification;
+import com.intuit.ipp.data.WebhooksEvent;
+import com.intuit.ipp.services.WebhooksService;
 import com.intuit.ipp.util.DateUtils;
 import com.intuit.ipp.util.Logger;
 
@@ -42,6 +43,9 @@ public class QueueProcessor implements Callable<Object> {
 	@Autowired
 	private CompanyConfigService companyConfigService;
 	
+	@Autowired
+    WebhooksServiceFactory webhooksServiceFactory;
+	
 	public static final String DATE_yyyyMMddTHHmmssSSSZ = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 	
 	@Override
@@ -52,11 +56,12 @@ public class QueueProcessor implements Callable<Object> {
 			String payload = queueService.getQueue().poll();
 			LOG.info("processing payload: Queue Size:" + queueService.getQueue().size());
 			
+			// create webhooks service
+			WebhooksService service = webhooksServiceFactory.getWebhooksService();
+			
 			//Convert payload to obj
-			ObjectMapper mapper = new ObjectMapper();
-			RequestWrapper request = mapper.readValue(payload, RequestWrapper.class);
-		
-		    EventNotification eventNotification =  request.getEventNotifications().get(0); 
+			WebhooksEvent event = service.getWebhooksEvent(payload);
+		    EventNotification eventNotification =  event.getEventNotifications().get(0); 
 
 			// get the company config
 			CompanyConfig companyConfig = companyConfigService.getCompanyConfigByRealmId(eventNotification.getRealmId());

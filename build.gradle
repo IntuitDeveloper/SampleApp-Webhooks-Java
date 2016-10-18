@@ -28,7 +28,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.codehaus.jackson:jackson-core-asl:1.9.13')
     compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
-    compile fileTree(dir: "lib/qbo-sdk-2.5.0", include: "*.jar")
+    compile fileTree(dir: "lib/qbo-sdk-2.6.0", include: "*.jar")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2"); //set the database to hyper sql
     compile("org.springframework.boot:spring-boot-starter-data-rest")
