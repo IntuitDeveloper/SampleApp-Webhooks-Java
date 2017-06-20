@@ -26,8 +26,8 @@ targetCompatibility = 1.8
 
 dependencies {
 	
-    compile("com.intuit.quickbooks-online:ipp-v3-java-data:2.9.1")
-	compile (group: 'com.intuit.quickbooks-online', name: 'ipp-v3-java-devkit', version: '2.9.1', classifier: 'jar-with-dependencies')   
+    compile("com.intuit.quickbooks-online:ipp-v3-java-data:2.9.3")
+	compile (group: 'com.intuit.quickbooks-online', name: 'ipp-v3-java-devkit', version: '2.9.3', classifier: 'jar-with-dependencies')   
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.springframework.boot:spring-boot-starter-web")
     compile("com.h2database:h2"); //set the database to hyper sql
