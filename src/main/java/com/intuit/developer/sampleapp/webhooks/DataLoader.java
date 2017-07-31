@@ -69,10 +69,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	 * 
 	 */
 	private void loadCompanyConfig() {
-		final CompanyConfig companyConfig = new CompanyConfig(env.getProperty("company1.id"), env.getProperty("company1.accessToken"), env.getProperty("company1.accessTokenSecret"), env.getProperty("company1.webhooks.subscribed.entities"));
+		final CompanyConfig companyConfig = new CompanyConfig(env.getProperty("company1.id"), env.getProperty("company1.accessToken"), env.getProperty("company1.accessTokenSecret"), env.getProperty("company1.webhooks.subscribed.entities"), env.getProperty("company1.oauth2.accessToken"));
 		companyConfigService.save(companyConfig);
 			
-		final CompanyConfig company2 = new CompanyConfig(env.getProperty("company2.id"), env.getProperty("company2.accessToken"), env.getProperty("company2.accessTokenSecret"), env.getProperty("company2.webhooks.subscribed.entities"));
+		final CompanyConfig company2 = new CompanyConfig(env.getProperty("company2.id"), env.getProperty("company2.accessToken"), env.getProperty("company2.accessTokenSecret"), env.getProperty("company2.webhooks.subscribed.entities"), env.getProperty("company1.oauth2.accessToken"));
 		companyConfigService.save(company2);
 	}
 

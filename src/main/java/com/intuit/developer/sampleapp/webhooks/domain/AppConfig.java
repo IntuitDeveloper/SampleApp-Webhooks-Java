@@ -34,5 +34,9 @@ public class AppConfig {
 		return env.getProperty("qbo.url");
 	}
 
+	//Flag to determine if app is OAuth1 or 2
+	public String getOAuthType() {
+		return env.getProperty("oauth.type");
+	}
 	
 }

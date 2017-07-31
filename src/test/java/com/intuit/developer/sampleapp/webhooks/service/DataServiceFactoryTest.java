@@ -52,6 +52,7 @@ public class DataServiceFactoryTest {
         Mockito.when(appConfig.getConsumerSecret()).thenReturn(consumerSecret);
         Mockito.when(appConfig.getAppToken()).thenReturn(appToken);
         Mockito.when(appConfig.getQboUrl()).thenReturn(qboUrl);
+        Mockito.when(appConfig.getOAuthType()).thenReturn("1");
         ReflectionTestUtils.setField(dataServiceFactory, "appConfig", appConfig);
 	}
 	
@@ -61,7 +62,7 @@ public class DataServiceFactoryTest {
         final String accessTokenSecret = "accessTokenSecret";
         final String realmId = "1234567";
         
-		CompanyConfig c = new CompanyConfig(realmId, accessToken, accessTokenSecret, null);
+		CompanyConfig c = new CompanyConfig(realmId, accessToken, accessTokenSecret, null, null);
 		
         DataService ds = dataServiceFactory.getDataService(c);
 		Assert.assertNotNull(ds);

@@ -8,6 +8,8 @@ import com.intuit.developer.sampleapp.webhooks.domain.CompanyConfig;
 import com.intuit.ipp.core.Context;
 import com.intuit.ipp.core.ServiceType;
 import com.intuit.ipp.exception.FMSException;
+import com.intuit.ipp.security.IAuthorizer;
+import com.intuit.ipp.security.OAuth2Authorizer;
 import com.intuit.ipp.security.OAuthAuthorizer;
 import com.intuit.ipp.services.DataService;
 import com.intuit.ipp.util.Config;
@@ -35,8 +37,13 @@ public class DataServiceFactory {
 		//set custom config, this should be commented for prod
 		Config.setProperty(Config.BASE_URL_QBO, appConfig.getQboUrl());
 		
-		//create oauth object
-		OAuthAuthorizer oauth = new OAuthAuthorizer(appConfig.getConsumerKey(), appConfig.getConsumerSecret(), companyConfig.getAccessToken(), companyConfig.getAccessTokenSecret());
+		//create oauth object based on OAuth type
+		IAuthorizer oauth; 
+		if(appConfig.getOAuthType().equals("1")) {
+			oauth = new OAuthAuthorizer(appConfig.getConsumerKey(), appConfig.getConsumerSecret(), companyConfig.getAccessToken(), companyConfig.getAccessTokenSecret());
+		} else {
+			oauth = new OAuth2Authorizer(companyConfig.getOauth2BearerToken());
+		}
 		//create context
 		Context context = new Context(oauth, appConfig.getAppToken(), ServiceType.QBO, companyConfig.getRealmId());
 		

@@ -28,11 +28,14 @@ public class CompanyConfig {
 	
 	private String lastCdcTimestamp; // timestamp when the last CDC call was made
 	
-	public CompanyConfig(String realmId, String accessToken, String accessTokenSecret, String webhooksSubscribedEntites) {
+	private String oauth2BearerToken; //for OAuth2 apps set this, accesstoken and accessTokenSecret will not be available.
+	
+	public CompanyConfig(String realmId, String accessToken, String accessTokenSecret, String webhooksSubscribedEntites, String oauth2BearerToken) {
         this.realmId = realmId;
         this.accessToken = accessToken;
         this.accessTokenSecret = accessTokenSecret;
         this.webhooksSubscribedEntites = webhooksSubscribedEntites;
+        this.oauth2BearerToken = oauth2BearerToken;
     }
 
 	public CompanyConfig() {
@@ -87,5 +90,13 @@ public class CompanyConfig {
 		this.lastCdcTimestamp = lastCdcTimestamp;
 	}
 
+	public String getOauth2BearerToken() {
+		return oauth2BearerToken;
+	}
+
+	public void setOauth2BearerToken(String oauth2BearerToken) {
+		this.oauth2BearerToken = oauth2BearerToken;
+	}
 	
+		
 }
