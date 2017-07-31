@@ -39,9 +39,10 @@ In order to successfully run this sample app you need a few things:
 ## First Use Instructions
 
 1. Clone the GitHub repo to your computer
-2. Fill in the [`application.properties`](src/main/resources/application.properties) file values (app token, consumer key, consumer secret) by copying over from the keys section for your app.
-3. Fill in the [`application.properties`](src/main/resources/application.properties) file values (realmId, access token key, access token secret) with the oauth tokens generated while connecting with the company. 
-4. Also add webhooks subscribed entities and webhooks verifier token that was generated when you subscribed for webhoooks event.
+2. In [`config.properties`](src/main/resources/config.properties), set oauth.type as 1 or 2 depending on type of app you have. For OAuth2 apps set value as 2.
+3. For OAuth2 apps, fill in the [`config.properties`](src/main/resources/config.properties) file values (companyid, oauth2.accessToken).
+4. For OAuth1 apps, fill in the [`config.properties`](src/main/resources/config.properties) file values (companyid, app token, consumer key, consumer secret, access token key, access token secret). 
+5. Also add webhooks subscribed entities and webhooks verifier token that was generated when you subscribed for webhoooks event.
 
 ## Running the code
 
