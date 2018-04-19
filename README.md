@@ -1,3 +1,5 @@
+[![Sample Banner](views/Sample.png)][ss1]
+
 # SampleApp-Webhooks-Java
 SampleApp-Webhooks-Java
 
@@ -92,3 +94,5 @@ Copy this url and use it for setting up webhooks on developer.intuit.com for you
 This app uses an in-memory temporary H2 database. The tables are loaded during startup with realmId and oauth tokens. The table is read and updated when webhooks notification is processed. Stopping the server
 will delete the records.
 The oauth tokens are encrypted and stored in the database. There is a sample encryption implementation provided using fake keys. For production use real keys, this can be updated in application.properties
+
+[ss1]: https://help.developer.intuit.com/s/samplefeedback?cid=9010&repoName=SampleApp-Webhooks-Java
