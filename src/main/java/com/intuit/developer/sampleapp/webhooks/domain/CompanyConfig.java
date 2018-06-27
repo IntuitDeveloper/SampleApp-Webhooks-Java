@@ -1,5 +1,6 @@
 package com.intuit.developer.sampleapp.webhooks.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class CompanyConfig {
 	
 	private String lastCdcTimestamp; // timestamp when the last CDC call was made
 	
+	@Column(length = 1000)
 	private String oauth2BearerToken; //for OAuth2 apps set this, accesstoken and accessTokenSecret will not be available.
 	
 	public CompanyConfig(String realmId, String accessToken, String accessTokenSecret, String webhooksSubscribedEntites, String oauth2BearerToken) {
