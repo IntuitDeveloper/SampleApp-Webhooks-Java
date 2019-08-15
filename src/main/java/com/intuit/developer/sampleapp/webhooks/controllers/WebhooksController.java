@@ -50,7 +50,6 @@ public class WebhooksController {
      * @return
      */
     @RequestMapping(value = "/webhooks", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<ResponseWrapper> webhooks(@RequestHeader(SIGNATURE) String signature, @RequestBody String payload) {
     	
     	// if signature is empty return 401
