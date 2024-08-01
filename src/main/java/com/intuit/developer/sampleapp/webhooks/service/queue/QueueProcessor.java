@@ -61,19 +61,19 @@ public class QueueProcessor implements Callable<Object> {
 			
 			//Convert payload to obj
 			WebhooksEvent event = service.getWebhooksEvent(payload);
-		    EventNotification eventNotification =  event.getEventNotifications().get(0); 
+		  for (EventNotification eventNotification : event.getEventNotifications()) {
 
-			// get the company config
-			CompanyConfig companyConfig = companyConfigService.getCompanyConfigByRealmId(eventNotification.getRealmId());
+        // get the company config
+        CompanyConfig companyConfig = companyConfigService.getCompanyConfigByRealmId(eventNotification.getRealmId());
 
-			// perform cdc with last updated timestamp and subscribed entities
-			String cdcTimestamp = DateUtils.getStringFromDateTime(DateUtils.getCurrentDateTime());
-			cdcService.callDataService(companyConfig);
+        // perform cdc with last updated timestamp and subscribed entities
+      	String cdcTimestamp = DateUtils.getStringFromDateTime(DateUtils.getCurrentDateTime());
+        cdcService.callDataService(companyConfig);
 
-			// update cdcTimestamp in companyconfig 
-			companyConfig.setLastCdcTimestamp(cdcTimestamp);
-			companyConfigService.save(companyConfig);
-
+        // update cdcTimestamp in companyconfig
+      	companyConfig.setLastCdcTimestamp(cdcTimestamp);
+        companyConfigService.save(companyConfig);
+      }
 		}
 		
 		return null;
